@@ -1,23 +1,28 @@
 export default {
   async fetch(request, env) {
-    // CORS preflight
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+
+    // Handle CORS preflight
     if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: corsHeaders(env) });
+      return new Response(null, { headers });
     }
 
     if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405, headers: corsHeaders(env) });
+      return new Response('Method not allowed', { status: 405, headers });
     }
 
     try {
       const data = await request.json();
       const { formType, fullName, email, phone, message, reason, amount, city, areaOfInterest, availability, skills, motivation } = data;
 
-      // Basic server-side validation
       if (!fullName || !email) {
         return new Response(JSON.stringify({ error: 'Missing required fields' }), {
           status: 400,
-          headers: { 'Content-Type': 'application/json', ...corsHeaders(env) },
+          headers: { 'Content-Type': 'application/json', ...headers },
         });
       }
 
@@ -49,8 +54,8 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Raham Foundation Website <forms@yourdomain.org>',
-          to: ['hello@rahamfoundation.org'],
+          from: 'Raham Foundation Website <onboarding@resend.dev>',
+          to: ['marwaamjad6578@gmail.com'],
           reply_to: email,
           subject: subjectMap[formType] || 'New Form Submission',
           html: bodyHtml,
@@ -61,30 +66,22 @@ export default {
         const err = await resendRes.text();
         return new Response(JSON.stringify({ error: 'Email send failed', detail: err }), {
           status: 502,
-          headers: { 'Content-Type': 'application/json', ...corsHeaders(env) },
+          headers: { 'Content-Type': 'application/json', ...headers },
         });
       }
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json', ...corsHeaders(env) },
+        headers: { 'Content-Type': 'application/json', ...headers },
       });
     } catch (err) {
       return new Response(JSON.stringify({ error: 'Invalid request' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json', ...corsHeaders(env) },
+        headers: { 'Content-Type': 'application/json', ...headers },
       });
     }
   },
 };
-
-function corsHeaders(env) {
-  return {
-    'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  };
-}
 
 function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, (c) => ({

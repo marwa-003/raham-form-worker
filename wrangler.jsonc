@@ -7,26 +7,26 @@
 	"name": "raham-form-worker",
 	"main": "src/index.js",
 	"compatibility_date": "2026-07-28",
-	"assets": {
-		// The path to the directory containing the `index.html` file to be served at `/`
-		"directory": "./public"
-	},
-	"durable_objects": {
-		"bindings": [
-			{
-				"class_name": "MyDurableObject",
-				"name": "MY_DURABLE_OBJECT"
-			}
-		]
-	},
-	"migrations": [
-		{
-			"new_sqlite_classes": [
-				"MyDurableObject"
-			],
-			"tag": "v1"
-		}
-	],
+	// "assets": {
+	// 	// The path to the directory containing the `index.html` file to be served at `/`
+	// 	"directory": "./public"
+	// },
+	// "durable_objects": {
+	// 	"bindings": [
+	// 		{
+	// 			"class_name": "MyDurableObject",
+	// 			"name": "MY_DURABLE_OBJECT"
+	// 		}
+	// 	]
+	// },
+	// "migrations": [
+	// 	{
+	// 		"new_sqlite_classes": [
+	// 			"MyDurableObject"
+	// 		],
+	// 		"tag": "v1"
+	// 	}
+	// ],
 	"observability": {
 		"enabled": true
 	},
