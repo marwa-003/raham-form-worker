@@ -28,7 +28,7 @@ export default {
 
       const subjectMap = {
         contact: `New Contact Form Submission — ${fullName}`,
-        donate: `New Donation Pledge — ₹${amount} from ${fullName}`,
+        donate: `New Donation Pledge — Rs${amount} from ${fullName}`,
         volunteer: `New Volunteer Application — ${fullName}`,
       };
 
@@ -38,7 +38,7 @@ export default {
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Phone:</strong> ${escapeHtml(phone || '')}</p>
         ${reason ? `<p><strong>Reason:</strong> ${escapeHtml(reason)}</p>` : ''}
-        ${amount ? `<p><strong>Amount:</strong> ₹${escapeHtml(amount)}</p>` : ''}
+        ${amount ? `<p><strong>Amount:</strong> Rs${escapeHtml(amount)}</p>` : ''}
         ${city ? `<p><strong>City:</strong> ${escapeHtml(city)}</p>` : ''}
         ${areaOfInterest ? `<p><strong>Area of Interest:</strong> ${escapeHtml(areaOfInterest)}</p>` : ''}
         ${availability ? `<p><strong>Availability:</strong> ${escapeHtml(availability)}</p>` : ''}
