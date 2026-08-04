@@ -28,7 +28,7 @@ export default {
 
       const subjectMap = {
         contact: `New Contact Form Submission — ${fullName}`,
-        donate: `New Donation Pledge — Rs${amount} from ${fullName}`,
+        donate: `New Donation Pledge — Rs ${amount} from ${fullName}`,
         volunteer: `New Volunteer Application — ${fullName}`,
       };
 
