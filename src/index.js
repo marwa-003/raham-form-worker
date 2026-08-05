@@ -55,7 +55,7 @@ export default {
         },
         body: JSON.stringify({
           from: 'Raham Foundation Website <onboarding@resend.dev>',
-          to: ['marvaa.002@gmail.com'],
+          to: ['marwaamjad6578@gmail.com'],
           reply_to: email,
           subject: subjectMap[formType] || 'New Form Submission',
           html: bodyHtml,
